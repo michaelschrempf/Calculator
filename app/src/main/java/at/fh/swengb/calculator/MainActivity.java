@@ -26,13 +26,18 @@ public class MainActivity extends AppCompatActivity {
         EditText editTextPower = (EditText) findViewById(R.id.editTextPower);
         EditText editTextHours = (EditText) findViewById(R.id.editTextHours);
 
-        double power = Double.parseDouble(editTextPower.getText().toString());
-        double hours = Double.parseDouble(editTextHours.getText().toString().trim());
+        try {
+            double power = Double.parseDouble(editTextPower.getText().toString());
+            double hours = Double.parseDouble(editTextHours.getText().toString().trim());
 
-        double result = ((power/1000)*hours)*365;
+            double result = ((power/1000)*hours)*365;
 
 
-        textViewResult.setText(Double.toString(result)+" "+"kW/H");
+            textViewResult.setText(Double.toString(result)+" "+"kW/H");
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            textViewResult.setText("Wrong Input!!!");
+        }
 
 
     }
