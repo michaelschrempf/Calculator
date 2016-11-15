@@ -27,13 +27,15 @@ public class MainActivity extends AppCompatActivity {
         EditText editTextHours = (EditText) findViewById(R.id.editTextHours);
 
         try {
-            double power = Double.parseDouble(editTextPower.getText().toString());
+            double power = Double.parseDouble(editTextPower.getText().toString().trim());
             double hours = Double.parseDouble(editTextHours.getText().toString().trim());
 
-            double result = ((power/1000)*hours)*365;
-
-
-            textViewResult.setText(Double.toString(result)+" "+"kW/H");
+            if (hours < 24) {
+                double result = ((power/1000)*hours)*365;
+                textViewResult.setText(Double.toString(result)+" "+"kW/H");
+            } else {
+                textViewResult.setText("Days only have 24 hours!!!");
+            }
         } catch (NumberFormatException e) {
             e.printStackTrace();
             textViewResult.setText("Wrong Input!!!");
