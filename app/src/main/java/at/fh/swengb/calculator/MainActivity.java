@@ -42,7 +42,8 @@ public class MainActivity extends AppCompatActivity {
             }
         } catch (NumberFormatException e) {
             e.printStackTrace();
-            textViewResult.setText("Wrong Input!!!");
+            String wrongInput = "Wrong Input!!!";
+            textViewResult.setText(wrongInput);
         }
 
 
