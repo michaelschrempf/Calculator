@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,9 +32,11 @@ public class MainActivity extends AppCompatActivity {
             double power = Double.parseDouble(editTextPower.getText().toString().trim());
             double hours = Double.parseDouble(editTextHours.getText().toString().trim());
 
-            if (hours < 24) {
+            DecimalFormat df = new DecimalFormat("####0.00");
+
+            if (hours <= 24) {
                 double result = ((power/1000)*hours)*365;
-                textViewResult.setText(Double.toString(result)+" "+"kW/H");
+                textViewResult.setText(df.format(result)+" "+"kW/H");
             } else {
                 textViewResult.setText("Days only have 24 hours!!!");
             }
