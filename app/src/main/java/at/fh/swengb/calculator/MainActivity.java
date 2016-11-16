@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void calculateConsumption(View view){
+    public double calculateConsumption(View view){
 
         TextView textViewResult = (TextView) findViewById(R.id.textViewResult);
         EditText editTextPower = (EditText) findViewById(R.id.editTextPower);
@@ -37,13 +37,42 @@ public class MainActivity extends AppCompatActivity {
             if (hours <= 24) {
                 double result = ((power/1000)*hours)*365;
                 textViewResult.setText(df.format(result)+" "+"kW/H");
+                return result;
             } else {
                 textViewResult.setText("Days only have 24 hours!!!");
             }
+
+
         } catch (NumberFormatException e) {
             e.printStackTrace();
             String wrongInput = "Wrong Input!!!";
             textViewResult.setText(wrongInput);
+        }
+
+
+        return 0;
+    }
+
+    public void calculateCosts(View view) {
+
+
+        TextView textViewCosts = (TextView) findViewById(R.id.textViewCosts);
+        //TextView textViewResult = (TextView) findViewById(R.id.textViewResult);
+        EditText editTextPrice = (EditText) findViewById(R.id.editTextPrice);
+
+        DecimalFormat df = new DecimalFormat("####0.00");
+
+        try {
+            //double result = Double.parseDouble(textViewResult.getText().toString().trim());
+            double costs = Double.parseDouble(editTextPrice.getText().toString().trim());
+
+            double costsPerYear = calculateConsumption(view) * costs;
+
+            textViewCosts.setText(df.format(costsPerYear)+" "+"Euro");
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            String wrongInput = "None or wrong Input!!";
+            textViewCosts.setText(wrongInput);
         }
 
 
