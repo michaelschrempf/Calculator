@@ -1,5 +1,6 @@
 package at.fh.swengb.calculator;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +11,8 @@ import java.text.DecimalFormat;
 
 
 public class MainActivity extends AppCompatActivity {
+
+
 
 
 
@@ -27,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
         TextView textViewResult = (TextView) findViewById(R.id.textViewResult);
         EditText editTextPower = (EditText) findViewById(R.id.editTextPower);
         EditText editTextHours = (EditText) findViewById(R.id.editTextHours);
+
+
 
         try {
             double power = Double.parseDouble(editTextPower.getText().toString().trim());
@@ -74,6 +79,23 @@ public class MainActivity extends AppCompatActivity {
             String wrongInput = "None or wrong Input!!";
             textViewCosts.setText(wrongInput);
         }
+
+
+    }
+
+    public void showAbout(View view) {
+
+        TextView textViewResult = (TextView) findViewById(R.id.textViewResult);
+        TextView textViewCosts = (TextView) findViewById(R.id.textViewCosts);
+
+        Intent intent = new Intent(this, ShowAboutActivity.class);
+        String message = textViewResult.getText().toString();
+        String message2 = textViewCosts.getText().toString();
+        intent.putExtra("resultOfCalculation", message);
+        intent.putExtra("resultOfCalculationCosts", message2);
+        startActivity(intent);
+
+
 
 
     }
